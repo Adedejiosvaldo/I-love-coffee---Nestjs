@@ -1,61 +1,77 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
   Param,
+  Patch,
   Post,
   Query,
   Res,
 } from '@nestjs/common';
 import { response } from 'express';
+import { CoffesService } from './coffes.service';
+import { Coffee } from './entities/coffee.entity';
 
 // Defines the route of /coffees
 @Controller('coffes')
 export class CoffesController {
+  constructor(private readonly coffeeService: CoffesService) {}
+
   // Get Method - Caries out a get method
   @Get()
-  findAll(@Query() paginationQuery): string {
-    const { limit, skip } = paginationQuery;
-    return (
-      'This action returns all coffess- Limit' + limit + ' ' + skip + 'skips'
-    );
+  findAll(@Query() paginationQuery): Coffee[] {
+    // const { limit, skip } = paginationQuery;
+    return this.coffeeService.findAll();
+    // return `typeof ${+limit}`;
   }
 
   //   We can create a nested route by creating another method
   @Get('flavors')
   getFlavors() {
-    return 'Returns only coffee flavors';
+    // return 'Returns only coffee flavors';
   }
 
   //   Adding route params eg router:123
   @Get(':id')
   getOne(@Param('id') id: string) {
-    // @Params allows us to grab all incoming params and use them inside the function body
-    return `This returns ${id} coffee`;
+    // @Params allows us to grab all incoming params and use them inside the function body\
+    return this.coffeeService.findOne(id);
+    // return `This returns ${id} coffee`;
   }
-
-  //   Switching to express
-  //   @Get(':id')
-  //   getOne(@Param('id') id: string, @Res() response) {
-  //     // @Params allows us to grab all incoming params and use them inside the function body
-  //     // return `This returns ${id} coffee`;
-  //     response.status(200).send(`This returns ${id} coffee`);
-  //   }
 
   //   POST Request and Request Body
   @Post()
-  @HttpCode(HttpStatus.GONE)
+  //   @HttpCode(HttpStatus.GONE)
   create(@Body() body) {
-    return body;
+    return this.coffeeService.createCoffee(body);
   }
 
-  //   //   We can specify a specific value in the request body
-  //   //   POST Request and Request Body
+  @Patch()
+  update(@Param('id') id: string, @Body() body) {
+    return this.coffeeService.updateCoffe(id, body);
+  }
 
-  //   @Post()
-  //   create(@Body('name') body) {
-  //     return body;
-  //   }
+  @Delete(':id')
+  deleteCoffe(@Param('id') id: string) {
+    return this.coffeeService.deleteCoffee(id);
+  }
 }
+
+//   //   We can specify a specific value in the request body
+//   //   POST Request and Request Body
+
+//   @Post()
+//   create(@Body('name') body) {
+//     return body;
+//   }
+
+//   Switching to express
+//   @Get(':id')
+//   getOne(@Param('id') id: string, @Res() response) {
+//     // @Params allows us to grab all incoming params and use them inside the function body
+//     // return `This returns ${id} coffee`;
+//     response.status(200).send(`This returns ${id} coffee`);
+//   }
