@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Query,
   Res,
 } from '@nestjs/common';
 import { response } from 'express';
@@ -15,8 +16,11 @@ import { response } from 'express';
 export class CoffesController {
   // Get Method - Caries out a get method
   @Get()
-  findAll(): string {
-    return 'This action returns all coffess';
+  findAll(@Query() paginationQuery): string {
+    const { limit, skip } = paginationQuery;
+    return (
+      'This action returns all coffess- Limit' + limit + ' ' + skip + 'skips'
+    );
   }
 
   //   We can create a nested route by creating another method
