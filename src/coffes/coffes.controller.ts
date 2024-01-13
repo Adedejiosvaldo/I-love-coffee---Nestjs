@@ -14,6 +14,8 @@ import {
 import { response } from 'express';
 import { CoffesService } from './coffes.service';
 import { Coffee } from './entities/coffee.entity';
+import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
+import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
 
 // Defines the route of /coffees
 @Controller('coffes')
@@ -45,13 +47,13 @@ export class CoffesController {
   //   POST Request and Request Body
   @Post()
   //   @HttpCode(HttpStatus.GONE)
-  create(@Body() body) {
-    return this.coffeeService.createCoffee(body);
+  create(@Body() createCoffeDTO: CreateCoffeeDto) {
+    return this.coffeeService.createCoffee(createCoffeDTO);
   }
 
   @Patch()
-  update(@Param('id') id: string, @Body() body) {
-    return this.coffeeService.updateCoffe(id, body);
+  update(@Param('id') id: string, @Body() updateCoffeDTO: UpdateCoffeeDto) {
+    return this.coffeeService.updateCoffe(id, updateCoffeDTO);
   }
 
   @Delete(':id')
