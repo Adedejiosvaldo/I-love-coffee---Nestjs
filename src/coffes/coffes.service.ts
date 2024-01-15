@@ -19,7 +19,7 @@ export class CoffesService {
 
   // Get All
   findAll() {
-    return this.coffeeRepository.find();
+    return this.coffeeRepository.find({ relations: ['flavors'] });
   }
 
   //   //   Get A coffee

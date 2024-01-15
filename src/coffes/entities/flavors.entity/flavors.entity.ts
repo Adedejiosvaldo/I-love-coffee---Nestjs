@@ -11,4 +11,4 @@ export class Flavors {
 
   @ManyToMany((type) => Coffee, (coffee) => coffee.flavors)
   coffee: Coffee[];
-}
+} 
