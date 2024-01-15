@@ -24,7 +24,7 @@ export class CoffesController {
 
   // Get Method - Caries out a get method
   @Get()
-  findAll(@Query() paginationQuery): Coffee[] {
+  findAll(@Query() paginationQuery) {
     // const { limit, skip } = paginationQuery;
     return this.coffeeService.findAll();
     // return `typeof ${+limit}`;
@@ -51,7 +51,7 @@ export class CoffesController {
     return this.coffeeService.createCoffee(createCoffeDTO);
   }
 
-  @Patch()
+  @Patch(':id')
   update(@Param('id') id: string, @Body() updateCoffeDTO: UpdateCoffeeDto) {
     return this.coffeeService.updateCoffe(id, updateCoffeDTO);
   }
