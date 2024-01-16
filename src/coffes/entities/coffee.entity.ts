@@ -1,7 +1,19 @@
 // Model or data type
-export class Coffee {
-  id: number;
+
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+
+// Schema Defination
+@Schema()
+export class Coffee extends Document {
+  @Prop()
   name: string;
-  brand: string;
+
+  @Prop()
+  brand: string;  
+
+  @Prop([String])
   flavors: string[];
 }
+
+export const CoffeeSchema = SchemaFactory.createForClass(Coffee);
