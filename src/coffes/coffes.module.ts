@@ -8,6 +8,7 @@ import {
   EventSchema,
 } from 'src/events/entities/event.entity/event.entity';
 import { COFFEE_BRANDS } from './coffee.constants';
+import { Connection } from 'mongoose';
 
 class MockclassCoffeeService {}
 class DevelopmentConfigService {}
@@ -31,10 +32,10 @@ export class coffeeBrandsFactory {
   controllers: [CoffesController],
   providers: [
     CoffesService,
-    coffeeBrandsFactory,
+    // coffeeBrandsFactory,
 
     // Non class providers
-    // { provide: COFFEE_BRANDS, useValue: ['brew buddy', 'nescafe'] },
+    { provide: COFFEE_BRANDS, useValue: ['brew buddy', 'nescafe'] },
 
     // UseClass providers
     // {
@@ -45,11 +46,22 @@ export class coffeeBrandsFactory {
     //       : ProductionConfigService,
     // },
     // useFactory providers
-    {
-      provide: COFFEE_BRANDS,
-      useFactory: (brandFactory: coffeeBrandsFactory) => brandFactory.create(),
-      inject: [coffeeBrandsFactory],
-    },
+    // {
+    //   provide: COFFEE_BRANDS,
+    //   useFactory: (brandFactory: coffeeBrandsFactory) => brandFactory.create(),
+    //   inject: [coffeeBrandsFactory],
+    // },
+
+    // Async Providers
+    // {
+    //   provide: COFFEE_BRANDS,
+    //   useFactory: async (connection: Connection): Promise<string[]> => {
+    //     const coffee = await Promise.resolve(['brew buddy', 'nescafe']);
+    //     console.log('[!] Async Factory');
+    //     return coffee;
+    //   },
+    //   inject: [Connection],
+    // },
   ],
   // Value provider --
   //   providers: [

@@ -21,8 +21,10 @@ export class CoffesService {
     @InjectModel(Coffee.name) private readonly CoffeeModel: Model<Coffee>,
     @InjectModel(Event.name) private readonly EventModel: Model<Event>,
     @InjectConnection() private readonly connection: Connection,
-    @Inject(COFFEE_BRANDS) coffeeBrands: coffeeBrandsFactory,
-  ) {}
+    @Inject(COFFEE_BRANDS) coffeeBrands: string[],
+  ) {
+    console.log(coffeeBrands);
+  }
 
   // Get All
   findAll(paginationQuery: PaginationQueryDto) {
