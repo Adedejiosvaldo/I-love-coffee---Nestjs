@@ -1,6 +1,7 @@
 import {
   HttpException,
   HttpStatus,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -11,6 +12,8 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
 import { Event } from 'src/events/entities/event.entity/event.entity';
+import { COFFEE_BRANDS } from './coffee.constants';
+import { coffeeBrandsFactory } from './coffes.module';
 
 @Injectable()
 export class CoffesService {
@@ -18,6 +21,7 @@ export class CoffesService {
     @InjectModel(Coffee.name) private readonly CoffeeModel: Model<Coffee>,
     @InjectModel(Event.name) private readonly EventModel: Model<Event>,
     @InjectConnection() private readonly connection: Connection,
+    @Inject(COFFEE_BRANDS) coffeeBrands: coffeeBrandsFactory,
   ) {}
 
   // Get All
