@@ -16,6 +16,7 @@ import { CoffesService } from './coffes.service';
 import { Coffee } from './entities/coffee.entity';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
 
 // Defines the route of /coffees
 @Controller('coffes')
@@ -24,9 +25,9 @@ export class CoffesController {
 
   // Get Method - Caries out a get method
   @Get()
-  findAll(@Query() paginationQuery) {
+  findAll(@Query() paginationQuery: PaginationQueryDto) {
     // const { limit, skip } = paginationQuery;
-    return this.coffeeService.findAll();
+    return this.coffeeService.findAll(paginationQuery);
     // return `typeof ${+limit}`;
   }
 
