@@ -14,6 +14,7 @@ import { Flavors } from './flavors.entity/flavors.entity';
 @Index(['name','id'])
 @Entity()
 // SQL Table === 'Coffee
+
 export class Coffee {
   @PrimaryGeneratedColumn()
   id: number;
