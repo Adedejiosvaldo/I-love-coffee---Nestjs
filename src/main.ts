@@ -10,7 +10,7 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
 
   // Guard
-  app.useGlobalGuards(new ApiKeyGuard());
+  //   app.useGlobalGuards(new ApiKeyGuard());
 
   //   Created a validation pipe globally
   app.useGlobalPipes(

@@ -10,6 +10,7 @@ import {
   Post,
   Query,
   Res,
+  SetMetadata,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -19,6 +20,7 @@ import { Coffee } from './entities/coffee.entity';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
+import { Public } from 'src/common/decorators/public.decorators';
 
 // Defines the route of /coffees
 
@@ -26,14 +28,17 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/paginati
 @Controller('coffes')
 export class CoffesController {
   constructor(private readonly coffeeService: CoffesService) {}
- 
+
   // Get Method - Caries out a get method
-  @UsePipes(ValidationPipe)
+  //   @UsePipes(ValidationPipe)
+
   @Get()
+  //   @SetMetadata('isPublic', true)
+
+  
+  @Public()
   findAll(@Query() paginationQuery: PaginationQueryDto) {
-    // const { limit, skip } = paginationQuery;
     return this.coffeeService.findAll(paginationQuery);
-    // return `typeof ${+limit}`;
   }
 
   //   We can create a nested route by creating another method
