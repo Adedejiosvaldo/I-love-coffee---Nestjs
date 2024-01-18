@@ -33,11 +33,11 @@ export class CoffesController {
   //   @UsePipes(ValidationPipe)
 
   @Get()
-  //   @SetMetadata('isPublic', true)
 
-  
+  //   @SetMetadata('isPublic', true)
   @Public()
-  findAll(@Query() paginationQuery: PaginationQueryDto) {
+  async findAll(@Query() paginationQuery: PaginationQueryDto) {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     return this.coffeeService.findAll(paginationQuery);
   }
 
