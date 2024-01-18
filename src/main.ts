@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/http-exception/http-exception.filter';
 import { ApiKeyGuard } from './common/guards/api-key/api-key.guard';
+import { WrapResponseInterceptorInterceptor } from './common/interceptor/wrap-response.interceptor/wrap-response.interceptor.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +12,9 @@ async function bootstrap() {
 
   // Guard
   //   app.useGlobalGuards(new ApiKeyGuard());
+
+  // Interceptors
+  app.useGlobalInterceptors(new WrapResponseInterceptorInterceptor());
 
   //   Created a validation pipe globally
   app.useGlobalPipes(
