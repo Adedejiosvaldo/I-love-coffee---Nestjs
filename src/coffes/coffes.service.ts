@@ -14,6 +14,7 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/paginati
 import { Event } from 'src/events/entities/event.entity/event.entity';
 import { COFFEE_BRANDS } from './coffee.constants';
 import { coffeeBrandsFactory } from './coffes.module';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class CoffesService {
@@ -22,8 +23,12 @@ export class CoffesService {
     @InjectModel(Event.name) private readonly EventModel: Model<Event>,
     @InjectConnection() private readonly connection: Connection,
     @Inject(COFFEE_BRANDS) coffeeBrands: string[],
+
+    // Injecting config service
+    private readonly configService: ConfigService,
   ) {
-    console.log(coffeeBrands);
+    const database = this.configService.get<string>('DATABASE_URL');
+    console.log(database);
   }
 
   // Get All

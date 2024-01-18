@@ -9,11 +9,11 @@ import {
 } from 'src/events/entities/event.entity/event.entity';
 import { COFFEE_BRANDS } from './coffee.constants';
 import { Connection } from 'mongoose';
+import { ConfigModule } from '@nestjs/config';
 
 class MockclassCoffeeService {}
 class DevelopmentConfigService {}
 class ProductionConfigService {}
-
 // Provider
 @Injectable()
 export class coffeeBrandsFactory {
@@ -28,6 +28,9 @@ export class coffeeBrandsFactory {
       { name: Coffee.name, schema: CoffeeSchema },
       { name: Event.name, schema: EventSchema },
     ]),
+
+    //
+    ConfigModule,
   ],
   controllers: [CoffesController],
   providers: [

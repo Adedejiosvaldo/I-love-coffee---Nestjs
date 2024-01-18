@@ -10,6 +10,8 @@ import {
   Post,
   Query,
   Res,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { response } from 'express';
 import { CoffesService } from './coffes.service';
@@ -19,11 +21,14 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
 
 // Defines the route of /coffees
+
+@UsePipes(ValidationPipe)
 @Controller('coffes')
 export class CoffesController {
   constructor(private readonly coffeeService: CoffesService) {}
-
+ 
   // Get Method - Caries out a get method
+  @UsePipes(ValidationPipe)
   @Get()
   findAll(@Query() paginationQuery: PaginationQueryDto) {
     // const { limit, skip } = paginationQuery;
