@@ -11,7 +11,7 @@ import { Connection, Model } from 'mongoose';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
-import { Event } from 'src/events/entities/event.entity/event.entity';
+// import { Event } from 'src/events/entities/event.entity/event.entity';
 import { COFFEE_BRANDS } from './coffee.constants';
 import { coffeeBrandsFactory } from './coffes.module';
 import { ConfigService } from '@nestjs/config';
@@ -20,16 +20,11 @@ import { ConfigService } from '@nestjs/config';
 export class CoffesService {
   constructor(
     @InjectModel(Coffee.name) private readonly CoffeeModel: Model<Coffee>,
-    @InjectModel(Event.name) private readonly EventModel: Model<Event>,
-    @InjectConnection() private readonly connection: Connection,
-    @Inject(COFFEE_BRANDS) coffeeBrands: string[],
+    // @InjectModel(Event.name) private readonly EventModel: Model<Event>,
+    // @InjectConnection() private readonly connection: Connection,
 
     // Injecting config service
-    private readonly configService: ConfigService,
-  ) {
-    const database = this.configService.get<string>('DATABASE_URL');
-    console.log(database);
-  }
+  ) {}
 
   // Get All
   findAll(paginationQuery: PaginationQueryDto) {

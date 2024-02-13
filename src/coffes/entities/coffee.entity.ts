@@ -7,7 +7,7 @@ import mongoose, { Document } from 'mongoose';
 @Schema()
 export class Coffee extends Document {
   // Declaring types
-  @Prop({ type: mongoose.SchemaTypes.String, index: true })
+  @Prop({ index: true })
   name: string;
 
   @Prop()
